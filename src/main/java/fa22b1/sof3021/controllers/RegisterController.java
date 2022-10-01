@@ -2,6 +2,8 @@ package fa22b1.sof3021.controllers;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,15 +13,22 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import fa22b1.sof3021.beans.Register;
+import fa22b1.sof3021.services.UserService;
 
 @Controller
 public class RegisterController {
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	@Qualifier("tiennh21")
+	private Register r;
+	
 	@GetMapping("register/form")
 	public String getRegisterForm(Model model)
 	{
-		System.out.println(123123);
-		Register r = new Register();
-//		r.setHoTen("DungNA29");
+		this.userService.test();
+		System.out.println(this.r.getHoTen());
 		model.addAttribute("data", r);
 		return "register";
 	}
